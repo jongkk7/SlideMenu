@@ -1,4 +1,20 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.dcendents.android-maven'
+
+//publish {
+//       userOrg = 'yjknainfox'
+//       groupId = 'com.yjk.ydrawanimationmenu'
+//       artifactId = 'yslidemenulibrary'
+//       publishVersion = '0.0.1'
+//       desc = 'sliding menu'
+//       website = 'https://github.com/jjongkwon2/YSlideMenu'
+//        issueTracker = "${website}/issues"
+//        repository = "${website}.git"
+//      }
+
+group='com.github.jjongkwon2'
+
 
 android {
     compileSdkVersion 26
