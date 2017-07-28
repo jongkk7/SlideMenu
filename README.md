@@ -4,8 +4,9 @@ This project is Sliding menu.<br>
 I made a project that was made open source but it was hard to use.. <br>
 This YSlideMenu is made up of dialog. Thanks!<br>
 
-<br>
-![gif]("https://github.com/jjongkwon2/YSlideMenu/blob/master/image/yslidemenu_anim.gif")
+
+![gif](https://github.com/jjongkwon2/YSlideMenu/blob/master/image/yslidemenu_anim.gif)
+
 
 ### installation
 -----
