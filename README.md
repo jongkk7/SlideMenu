@@ -7,6 +7,8 @@ This YElideMenu is made up of dialogue. Thanks. <br>
 
 ![gif](https://github.com/jjongkwon2/YSlideMenu/blob/master/image/yslidemenu_anim.gif)
 
+<br>
+
 ### installation
 -----
 step 1. Add the following to your build.gradle file
