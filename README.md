@@ -1,12 +1,13 @@
 # YSlideMenu
-------------
+-----
 This project is Sliding menu.<br>
 I made a project that was made open source but it was hard to use.. So I made this project<br>
 This YSlideMenu is made up of dialog. Thanks!<br>
 
 <br>
+
 ### installation
-----------------
+-----
 step 1. Add the following to your build.gradle file
 ``` java
 repositories {
@@ -27,8 +28,9 @@ dependencies {
 
 
 <br>
+
 ### Basic Usage
----------------
+-----
 step 1. create button list and add button icon, fragment<br>
 - icon is menu button icon<br>
 - fragment is next screen
@@ -99,12 +101,14 @@ public class MainActivity extends AppCompatActivity {
 ```
 
 <br>
+
 ### Custom Menu Usage
----------------------
+-----
 Comming soon..
 
 
 ### other
+-----
 - settings
 ``` java
 public void setMenuButtonBackground(String color)
