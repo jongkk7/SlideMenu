@@ -1,13 +1,14 @@
 # YSlideMenu
 -----
 This project is Sliding menu.<br>
-I made a project that was made open source but it was hard to use.. <br>
-This YSlideMenu is made up of dialog. Thanks!<br>
+There is  a ready-made open source but I made it by myself because it is hard to use.<br>
+This YElideMenu is made up of dialogue. Thanks. <br>
 
 
 ![gif](https://github.com/jjongkwon2/YSlideMenu/blob/master/image/yslidemenu_anim.gif)
 
 
+<br>
 ### installation
 -----
 step 1. Add the following to your build.gradle file
@@ -30,7 +31,6 @@ dependencies {
 
 
 <br>
-
 ### Basic Usage
 -----
 step 1. create button list and add button icon, fragment<br>
@@ -103,12 +103,11 @@ public class MainActivity extends AppCompatActivity {
 ```
 
 <br>
-
 ### Custom Menu Usage
 -----
 Comming soon..
 
-
+<br>
 ### other
 -----
 - settings
@@ -120,3 +119,7 @@ public void setMenuButtonDelay(int delay)
 public void setMenuButtonDuration(int duration)
 public void setTransformDuration(int duration)
 ```
+
+
+<br>
+### Thanks for
