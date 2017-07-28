@@ -7,8 +7,6 @@ This YElideMenu is made up of dialogue. Thanks. <br>
 
 ![gif](https://github.com/jjongkwon2/YSlideMenu/blob/master/image/yslidemenu_anim.gif)
 
-
-<br>
 ### installation
 -----
 step 1. Add the following to your build.gradle file
@@ -29,12 +27,10 @@ dependencies {
 }
 ```
 
-
-<br>
 ### Basic Usage
 -----
 step 1. create button list and add button icon, fragment<br>
-- icon is menu button icon<br>
+- icon is menu button icon
 - fragment is next screen
 ``` java
 List<ButtonInfomation> buttonList = new ArrayList<>();
@@ -45,7 +41,7 @@ buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment4()));
 buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment5()));
 ```
 
-step 2. Prepare the layout Id for the next screen
+step 2. Prepare the layout Id for the next screen<br>
 - This layout is the layout that changes when the button is clicked.
 ``` xml
 <RelativeLayout
@@ -102,12 +98,10 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-<br>
 ### Custom Menu Usage
 -----
 Comming soon..
 
-<br>
 ### other
 -----
 - settings
@@ -120,6 +114,4 @@ public void setMenuButtonDuration(int duration)
 public void setTransformDuration(int duration)
 ```
 
-
-<br>
 ### Thanks for
