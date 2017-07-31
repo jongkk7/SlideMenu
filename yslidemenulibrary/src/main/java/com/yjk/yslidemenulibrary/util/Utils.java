@@ -23,7 +23,6 @@ public class Utils {
     Data data;
 
     public Utils(){
-        data = new Data();
     }
 
     /*
@@ -61,7 +60,7 @@ public class Utils {
     /*
         이미지로 버튼 생성
      */
-    public ImageButton createButton(Context context, int drawable){
+    public ImageButton createButton(Context context, int drawable, Data data){
         ImageButton button = new ImageButton(context);
 
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuButtonWidth, data.menuButtonHeight);

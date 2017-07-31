@@ -105,7 +105,7 @@ public class YSlideMenu extends Dialog {
             Fragment fragment = info.getFragment();
 
             // create menu button
-            button = utils.createButton(activity, res);
+            button = utils.createButton(activity, res, data);
 
             // set click listener
             button.setOnClickListener(new MenuButtonOnClickListener(activity, fragment));
