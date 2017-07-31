@@ -47,6 +47,7 @@ public class YSlideMenu extends Dialog {
     private List<ImageButton> buttonList;
 
     private int parentLayout;   // 변경할 레이아웃
+    private boolean close = true;
 
     public YSlideMenu(Activity activity, List<ButtonInfomation> buttonInfoList) {
         super(activity);
@@ -135,7 +136,7 @@ public class YSlideMenu extends Dialog {
         getWindow().getDecorView().getHitRect(dialogBounds);
 
         // 이벤트의 범위가 Dialog의 밖일 경우
-        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY())){
+        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY()) && close){
             startCloseAnimation();
         }
         return super.dispatchTouchEvent(ev);
@@ -209,6 +210,9 @@ public class YSlideMenu extends Dialog {
             for (ImageButton button : buttonList) {
                 button.setClickable(false);
             }
+
+            // 외부 화면 클릭 시 변동 없음
+            close = false;
 
             // 화면 전환 애니메이션 효과
             View myView = activity.findViewById(parentLayout);
