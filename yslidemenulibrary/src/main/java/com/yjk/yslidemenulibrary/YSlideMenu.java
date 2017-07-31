@@ -53,24 +53,20 @@ public class YSlideMenu extends Dialog {
         super(activity);
         this.activity = activity;
         this.buttonInfoList = buttonInfoList;
-    }
 
-    public void setParentLayout(int id){
-        parentLayout = id;
-    }
-
-    public void init(){
         data = new Data();
         utils = new Utils();
 
         buttonList = new ArrayList<>();
     }
 
+    public void setParentLayout(int id){
+        parentLayout = id;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        init();
 
         // layout 설정
         setContentView(R.layout.y_slide_menu_dialog);
