@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,7 +48,7 @@ public class YSlideMenu extends Dialog {
 
     private int parentLayout;   // 변경할 레이아웃
 
-    public YSlideMenu(@NonNull Activity activity, List<ButtonInfomation> buttonInfoList) {
+    public YSlideMenu(Activity activity, List<ButtonInfomation> buttonInfoList) {
         super(activity);
         this.activity = activity;
         this.buttonInfoList = buttonInfoList;
@@ -131,7 +130,7 @@ public class YSlideMenu extends Dialog {
         화면 터치이벤트 발생 시
      */
     @Override
-    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         Rect dialogBounds = new Rect();
         getWindow().getDecorView().getHitRect(dialogBounds);
 
