@@ -110,6 +110,9 @@ public class YSlideMenu extends Dialog {
             // set click listener
             button.setOnClickListener(new MenuButtonOnClickListener(activity, fragment));
 
+            // set button background
+            button.setBackgroundColor(Color.parseColor(data.menuBackground));
+
             // set start animation
             setOpenAnimation(button, count * data.delay);
 
