@@ -59,17 +59,32 @@ step 3. create YSlideMenu<br>
 ``` java
 YSlideMenu menu = new YSlideMenu(this, buttonList);
 menu.setParentLayout(R.id.parentLayout);
-menu.show();
 ```
-<br>
+
+step 4. slide menu show!<br>
+- ex) menuBtn clicked
+``` java
+menuBtn = (Button)findViewById(R.id.menuBtn);
+menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menu.show();
+            }
+        });
+```
 *Run !*
 
 Full source
 ``` java
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
+    public static final String TAG = "YDrawAnimationMenu_LOG";
+
+//    YDrawAnimationMenu menu;
+//    List<ImageButton> buttonList;
 
     YSlideMenu menu;
-    List<ButtonInfomation> buttonList;
+    List<ButtonInfomation> buttonInfoList;
+
 
     Button menuBtn;
 
@@ -78,28 +93,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        menuBtn = (Button)findViewById(R.id.menuBtn);
+        naviInit();
+
+        init();
+    }
+
+    public void naviInit(){
+        buttonInfoList = new ArrayList<ButtonInfomation>();
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment01()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_2, new Fragment02()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_3, new Fragment03()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_4, new Fragment04()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_5, new Fragment05()));
+
+        menu = new YSlideMenu(MainActivity.this, buttonInfoList);
+        menu.setParentLayout(R.id.parentFrgment);
+    }
+
+    public void init(){
+        menuBtn = (Button)findViewById(R.id.menubutton);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showNavigationMenu();
+                menu.show();
             }
         });
     }
 
-    public void showNavigationMenu(){
-        buttonList = new ArrayList<>();
-        buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment1()));
-        buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment2()));
-        buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment3()));
-        buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment4()));
-        buttonList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment5()));
 
-        menu = new YSlideMenu(this, buttonList);
-        menu.setParentLayout(R.id.parentLayout);
-        menu.show();
-    }
 }
+
 ```
 
 ### Custom Menu Usage
@@ -110,12 +133,15 @@ Comming soon..
 -----
 - settings
 ``` java
-public void setMenuButtonBackground(String color)
-public void setMenuButtonSize(int size)
-public void setMenuButtonIconSize(int size)
-public void setMenuButtonDelay(int delay)
-public void setMenuButtonDuration(int duration)
-public void setTransformDuration(int duration)
+public void setMenuButtonBackground(String color) // "#FF424859"
+public void setMenuButtonSize(int size)           // 280
+public void setMenuButtonIconSize(int size)       // 150
+public void setMenuButtonDelay(int delay)         // 100
+public void setMenuButtonDuration(int duration)   // 500
+public void setTransformDuration(int duration)    // 1000
+public void setScrollBar(boolean scrollBar)       // false
+public void setLayoutPoint(int gravity)           // Gravity.LEFT || Gravity.RIGHT
+public void setCenter(int gravity)                // Gravity.TOP || Gravity.CENTER_VERTICAL || Gravity.BOTTOM
 ```
 
 ### Thanks for
