@@ -1,6 +1,7 @@
 package com.yjk.yslidemenulibrary;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -9,6 +10,7 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -17,6 +19,7 @@ import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -48,7 +51,7 @@ public class YSlideMenu extends Dialog {
     private List<ImageButton> buttonList;
 
     private int parentLayout;   // 변경할 레이아웃
-    private boolean close = true;
+    private boolean close;
 
     public YSlideMenu(Activity activity, List<ButtonInfomation> buttonInfoList) {
         super(activity);
@@ -87,8 +90,30 @@ public class YSlideMenu extends Dialog {
 
         // layout에 버튼 추가
         addButton();
+
+        // 클릭 초기화
+        close = true;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 클릭 초기화
+        close = true;
+
+        //시작 애니매이션 실행
+        int count = 0;
+        for (ImageButton button : buttonList) {
+            button.setClickable(true);
+
+            // set start animation
+            setOpenAnimation(button, count * data.delay);
+
+            // for delay
+            count++;
+        }
+
+    }
 
     /****************************
      *  create menu button
@@ -163,10 +188,10 @@ public class YSlideMenu extends Dialog {
         float centerX = data.openCenterX;
         float centerY = view.getHeight()/2.0f;
 
-        Rotate3dAnimation rotate = new Rotate3dAnimation(start, end, centerX, centerY, 0, false);
-        rotate.setDuration(data.duration);
-        rotate.setStartOffset( delay );
-        view.setAnimation(rotate);
+        Rotate3dAnimation openRotate = new Rotate3dAnimation(start, end, centerX, centerY, 0, false);
+        openRotate.setDuration(data.duration);
+        openRotate.setStartOffset( delay );
+        view.setAnimation(openRotate);
     }
 
     /*
@@ -220,7 +245,11 @@ public class YSlideMenu extends Dialog {
             //한번 클릭 시 더 이상 클릭 불가
             for (ImageButton button : buttonList) {
                 button.setClickable(false);
+                button.setBackgroundColor(Color.parseColor(data.menuBackground));
             }
+
+            // 클릭된 버튼 색깔 변경
+            view.setBackgroundColor(Color.parseColor(data.menuButtonBackground));
 
             // 외부 화면 클릭 시 변동 없음
             close = false;
@@ -229,11 +258,11 @@ public class YSlideMenu extends Dialog {
             View myView = activity.findViewById(parentLayout);
             int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
 
+
             int[] location = new int[2];
             view.getLocationOnScreen(location);
             int x = location[0];
             int y = location[1];
-
             Animator animator = ViewAnimationUtils.createCircularReveal(myView, x, y, 0, finalRadius);
             animator.setInterpolator(new AccelerateDecelerateInterpolator());
             animator.setDuration(data.circleDuration);
