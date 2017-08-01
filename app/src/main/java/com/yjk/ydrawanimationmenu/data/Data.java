@@ -14,7 +14,8 @@ public class Data {
     public int menuIconWidth = 150;    // 메뉴 아이콘의 가로
     public int menuIconHeight = 150;   // 메뉴 아이콘의 세로
 
-    public String menuBackground = "#FFFEE5D9"; // 메뉴 버튼의 배경 ( 레이아웃의 배경이 아님 )
+    public String menuBackground = "#FF424859";     // 메뉴 버튼의 배경 ( 레이아웃의 배경이 아님 )
+    public String menuButtonBackground = "#0377d2"; // 클릭된 버튼 배경
 
     public int delay = 100;             // 메뉴 버튼과 버튼 사이의 애니메이션 딜레이
     public int duration = 500;          // 애니메이션 시간

@@ -30,7 +30,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        naviInit();
+
         init();
+    }
+
+    public void naviInit(){
+        buttonInfoList = new ArrayList<ButtonInfomation>();
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment01()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_2, new Fragment02()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_3, new Fragment03()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_4, new Fragment04()));
+        buttonInfoList.add(new ButtonInfomation(R.drawable.icn_5, new Fragment05()));
+
+        menu = new YSlideMenu(MainActivity.this, buttonInfoList);
+        menu.setParentLayout(R.id.parentFrgment);
     }
 
     public void init(){
@@ -38,22 +52,7 @@ public class MainActivity extends AppCompatActivity {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    buttonInfoList = new ArrayList<ButtonInfomation>();
-                    buttonInfoList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment01()));
-                    buttonInfoList.add(new ButtonInfomation(R.drawable.icn_2, new Fragment02()));
-                    buttonInfoList.add(new ButtonInfomation(R.drawable.icn_3, new Fragment03()));
-                    buttonInfoList.add(new ButtonInfomation(R.drawable.icn_4, new Fragment04()));
-                    buttonInfoList.add(new ButtonInfomation(R.drawable.icn_5, new Fragment05()));
-
-                    menu = new YSlideMenu(MainActivity.this, buttonInfoList);
-                    menu.setParentLayout(R.id.parentFrgment);
-                    menu.setLayoutPoint(Gravity.RIGHT);
-                    menu.show();
-
-                }catch (Exception e){
-                    Log.d(TAG,"error : " + e.getMessage());
-                }
+                menu.show();
             }
         });
     }
