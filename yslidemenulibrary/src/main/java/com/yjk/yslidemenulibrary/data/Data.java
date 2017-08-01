@@ -18,4 +18,5 @@ public class Data {
     public int duration = 500; // 애니메이션 시간
     public int circleDuration = 1000; // 화면 전환 시
 
+    public boolean scrollBar = false; // 스크롤바의 막대 유무
 }

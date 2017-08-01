@@ -19,6 +19,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.yjk.yslidemenulibrary.data.ButtonInfomation;
 import com.yjk.yslidemenulibrary.data.Data;
@@ -88,6 +89,10 @@ public class YSlideMenu extends Dialog {
 
         // layout에 버튼 추가
         addButton();
+
+        // set ScrollBar
+        ScrollView scrollView = (ScrollView)findViewById(R.id.ySlideMenuScrollView);
+        scrollView.setVerticalScrollBarEnabled(data.scrollBar);
     }
 
     /****************************
@@ -134,8 +139,8 @@ public class YSlideMenu extends Dialog {
         Rect dialogBounds = new Rect();
         getWindow().getDecorView().getHitRect(dialogBounds);
 
-        // 이벤트의 범위가 Dialog의 밖일 경우
-        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY()) && close){
+        // 이벤트의 범위가 Dialog의 밖일 경우 && 종료 이벤트 중이 아닐 경우 && 스크롤 중이 아닐 경우
+        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY()) && close && ev.getAction()==MotionEvent.ACTION_DOWN){
             startCloseAnimation();
         }
         return super.dispatchTouchEvent(ev);
