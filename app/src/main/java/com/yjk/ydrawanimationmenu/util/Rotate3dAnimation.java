@@ -1,4 +1,4 @@
-package com.yjk.ydrawanimationmenu.menu;
+package com.yjk.ydrawanimationmenu.util;
 
 /*
  * Copyright (C) 2007 The Android Open Source Project

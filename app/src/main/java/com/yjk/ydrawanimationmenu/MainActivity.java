@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.yjk.ydrawanimationmenu.menu.ButtonInfomation;
-import com.yjk.ydrawanimationmenu.menu.YDrawAnimationMenu;
+import com.yjk.ydrawanimationmenu.data.ButtonInfomation;
 import com.yjk.ydrawanimationmenu.menu.YSlideMenu;
 
 import java.util.ArrayList;

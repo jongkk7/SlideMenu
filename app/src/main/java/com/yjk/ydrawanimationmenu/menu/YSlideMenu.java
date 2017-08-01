@@ -1,7 +1,6 @@
 package com.yjk.ydrawanimationmenu.menu;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -11,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,17 +17,22 @@ import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.yjk.ydrawanimationmenu.R;
+import com.yjk.ydrawanimationmenu.data.ButtonInfomation;
+import com.yjk.ydrawanimationmenu.data.Data;
+import com.yjk.ydrawanimationmenu.util.Rotate3dAnimation;
+import com.yjk.ydrawanimationmenu.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yjk on 2017. 7. 26..
+ * Created by yjk on 2017. 7. 27..
+ * 화면전환, 애니메이션을 자동으로 설정해주는 클래스
  */
 
 public class YSlideMenu extends Dialog {
@@ -46,35 +49,32 @@ public class YSlideMenu extends Dialog {
     private List<ImageButton> buttonList;
 
     private int parentLayout;   // 변경할 레이아웃
+    private boolean close = true;
 
-    public YSlideMenu(@NonNull Activity activity, List<ButtonInfomation> buttonInfoList) {
+    public YSlideMenu(Activity activity, List<ButtonInfomation> buttonInfoList) {
         super(activity);
         this.activity = activity;
         this.buttonInfoList = buttonInfoList;
-    }
 
-    public void setParentLayout(int id){
-        parentLayout = id;
-    }
-
-    public void init(){
         data = new Data();
         utils = new Utils();
 
         buttonList = new ArrayList<>();
     }
 
+    public void setParentLayout(int id){
+        parentLayout = id;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        init();
 
         // layout 설정
         setContentView(R.layout.y_slide_menu_dialog);
         setCanceledOnTouchOutside(false);
         layout = (LinearLayout)findViewById(R.id.ySlideMenuDialog);
-        layout.setLayoutParams(new LinearLayout.LayoutParams(data.menuLayoutWidth, utils.getDisplayHeight(this)));
+        //layout.setLayoutParams(new LinearLayout.LayoutParams(data.menuLayoutWidth, utils.getDisplayHeight(this)));
 
 
         // Dialog의 배경 없애기
@@ -92,14 +92,12 @@ public class YSlideMenu extends Dialog {
         addButton();
     }
 
-
-
-    /*
-        create menu button
-        setting animation
-        setting Click listener
-        addView
-     */
+    /****************************
+     *  create menu button
+     *  setting animation
+     *  setting Click listener
+     *  addView
+     ****************************/
     private void addButton(){
         ImageButton button;
         int count = 0;
@@ -109,13 +107,20 @@ public class YSlideMenu extends Dialog {
             Fragment fragment = info.getFragment();
 
             // create menu button
-            button = utils.createButton(activity, res);
+            button = utils.createButton(activity, res, data);
 
             // set click listener
             button.setOnClickListener(new MenuButtonOnClickListener(activity, fragment));
 
+            // set button background
+            button.setBackgroundColor(Color.parseColor(data.menuBackground));
+
             // set start animation
             setOpenAnimation(button, count * data.delay);
+
+            // set ScrollBar
+            ScrollView scrollView = (ScrollView)findViewById(R.id.ySlideMenuScrollView);
+            scrollView.setVerticalScrollBarEnabled(data.scrollBar);
 
             // addView
             layout.addView(button);
@@ -127,14 +132,17 @@ public class YSlideMenu extends Dialog {
     }
 
 
-
+    /*
+        화면 터치이벤트 발생 시
+     */
     @Override
-    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         Rect dialogBounds = new Rect();
         getWindow().getDecorView().getHitRect(dialogBounds);
 
         // 이벤트의 범위가 Dialog의 밖일 경우
-        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY())){
+        if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY()) && close && ev.getAction()==MotionEvent.ACTION_DOWN){
+            close = !close;
             startCloseAnimation();
         }
         return super.dispatchTouchEvent(ev);
@@ -184,6 +192,12 @@ public class YSlideMenu extends Dialog {
     }
 
 
+    /******************
+     *
+     *  리스너
+     *
+     ******************/
+
     /*
         메뉴 버튼 클릭 리스너 ( Fragment 전환 )
      */
@@ -192,7 +206,6 @@ public class YSlideMenu extends Dialog {
         private Fragment fragment;
 
         public MenuButtonOnClickListener(Activity activity, Fragment fragment){
-
             this.activity = activity;
             this.fragment = fragment;
         }
@@ -203,6 +216,9 @@ public class YSlideMenu extends Dialog {
             for (ImageButton button : buttonList) {
                 button.setClickable(false);
             }
+
+            // 외부 화면 클릭 시 변동 없음
+            close = false;
 
             // 화면 전환 애니메이션 효과
             View myView = activity.findViewById(parentLayout);
@@ -247,6 +263,12 @@ public class YSlideMenu extends Dialog {
         public void onAnimationRepeat(Animation animation) {}
     }
 
+
+    /*****************************
+     *
+     * 사용자 설정 가능한 메소드
+     *
+     *****************************/
     public void setMenuButtonBackground(String color){
         data.menuBackground = color;
     }
@@ -259,16 +281,16 @@ public class YSlideMenu extends Dialog {
         data.menuIconWidth = size;
         data.menuIconHeight = size;
     }
-
     public void setMenuButtonDelay(int delay){
         data.delay = delay;
     }
-
     public void setMenuButtonDuration(int duration){
         data.duration = duration;
     }
-
     public void setTransformDuration(int duration){
         data.circleDuration = duration;
+    }
+    public void setScrollBar(boolean scrollBar){
+        data.scrollBar = scrollBar;
     }
 }

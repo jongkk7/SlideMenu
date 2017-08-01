@@ -1,11 +1,11 @@
-package com.yjk.ydrawanimationmenu.menu;
+package com.yjk.ydrawanimationmenu.data;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.hardware.camera2.params.Face;
 
 /**
  * Created by yjk on 2017. 7. 27..
+ * res : 아이콘
+ * fragment : 다음에 올 화면
  */
 
 public class ButtonInfomation {

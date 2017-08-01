@@ -1,29 +1,28 @@
-package com.yjk.ydrawanimationmenu.menu;
+package com.yjk.ydrawanimationmenu.util;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.media.Image;
 import android.view.Display;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.yjk.ydrawanimationmenu.R;
+import com.yjk.ydrawanimationmenu.data.Data;
 
 /**
  * Created by yjk on 2017. 7. 26..
+ * 화면크기
+ * 비트맵 리사이즈
+ * 버튼 생성
  */
 
 public class Utils {
     Data data;
 
     public Utils(){
-        data = new Data();
     }
 
     /*
@@ -61,7 +60,7 @@ public class Utils {
     /*
         이미지로 버튼 생성
      */
-    public ImageButton createButton(Context context, int drawable){
+    public ImageButton createButton(Context context, int drawable, Data data){
         ImageButton button = new ImageButton(context);
 
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuButtonWidth, data.menuButtonHeight);
