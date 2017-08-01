@@ -25,8 +25,10 @@ repositories {
 step 2. Add the dependency
 ``` java
 dependencies {
-    compile 'com.github.jjongkwon2:YSlideMenu:1.0.1'
+    compile 'com.github.jjongkwon2:YSlideMenu:<last version>'
 }
+
+// compile 'com.github.jjongkwon2:YSlideMenu:1.0.8'
 ```
 
 ### Basic Usage
