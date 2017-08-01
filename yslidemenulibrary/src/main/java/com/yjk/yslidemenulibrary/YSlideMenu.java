@@ -73,8 +73,6 @@ public class YSlideMenu extends Dialog {
         setContentView(R.layout.y_slide_menu_dialog);
         setCanceledOnTouchOutside(false);
         layout = (LinearLayout)findViewById(R.id.ySlideMenuDialog);
-        layout.setLayoutParams(new LinearLayout.LayoutParams(data.menuLayoutWidth, utils.getDisplayHeight(this)));
-
 
         // Dialog의 배경 없애기
         ColorDrawable dialogColor = new ColorDrawable(Color.GRAY);
@@ -85,22 +83,20 @@ public class YSlideMenu extends Dialog {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         // Dialog 왼쪽 정렬
-        getWindow().setGravity(Gravity.LEFT);
+        getWindow().setGravity(data.point|data.center);
 
         // layout에 버튼 추가
         addButton();
-
-        // set ScrollBar
-        ScrollView scrollView = (ScrollView)findViewById(R.id.ySlideMenuScrollView);
-        scrollView.setVerticalScrollBarEnabled(data.scrollBar);
     }
 
+
     /****************************
-      *  create menu button
-      *  setting animation
-      *  setting Click listener
-      *  addView
+     *  create menu button
+     *  setting animation
+     *  setting Click listener
+     *  addView
      ****************************/
+
     private void addButton(){
         ImageButton button;
         int count = 0;
@@ -121,6 +117,10 @@ public class YSlideMenu extends Dialog {
             // set start animation
             setOpenAnimation(button, count * data.delay);
 
+            // set ScrollBar
+            ScrollView scrollView = (ScrollView)findViewById(R.id.ySlideMenuScrollView);
+            scrollView.setVerticalScrollBarEnabled(data.scrollBar);
+
             // addView
             layout.addView(button);
             buttonList.add(button);
@@ -139,12 +139,19 @@ public class YSlideMenu extends Dialog {
         Rect dialogBounds = new Rect();
         getWindow().getDecorView().getHitRect(dialogBounds);
 
-        // 이벤트의 범위가 Dialog의 밖일 경우 && 종료 이벤트 중이 아닐 경우 && 스크롤 중이 아닐 경우
+        // 이벤트의 범위가 Dialog의 밖일 경우
         if(!dialogBounds.contains((int)ev.getX(), (int)ev.getY()) && close && ev.getAction()==MotionEvent.ACTION_DOWN){
+            close = !close;
             startCloseAnimation();
         }
         return super.dispatchTouchEvent(ev);
     }
+
+    /******************
+     *
+     *  애니메이션
+     *
+     ******************/
 
     /*
         시작 애니메이션
@@ -153,7 +160,7 @@ public class YSlideMenu extends Dialog {
         float start = 90f;
         float end = 0f;
 
-        float centerX = view.getWidth()/2.0f;
+        float centerX = data.openCenterX;
         float centerY = view.getHeight()/2.0f;
 
         Rotate3dAnimation rotate = new Rotate3dAnimation(start, end, centerX, centerY, 0, false);
@@ -170,7 +177,7 @@ public class YSlideMenu extends Dialog {
         float start = 0f;
         float end = 90f;
         for (ImageButton button : buttonList) {
-            float centerX = 0; // 좌측으로 사라지게
+            float centerX = data.closeCenterX;
             float centerY = button.getHeight()/2.0f;
 
             Rotate3dAnimation rotate = new Rotate3dAnimation(start, end, centerX, centerY, 0, true);
@@ -222,7 +229,12 @@ public class YSlideMenu extends Dialog {
             View myView = activity.findViewById(parentLayout);
             int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
 
-            Animator animator = ViewAnimationUtils.createCircularReveal(myView, (int)view.getX(), (int)view.getY(), 0, finalRadius);
+            int[] location = new int[2];
+            view.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+
+            Animator animator = ViewAnimationUtils.createCircularReveal(myView, x, y, 0, finalRadius);
             animator.setInterpolator(new AccelerateDecelerateInterpolator());
             animator.setDuration(data.circleDuration);
             animator.addListener(new Animator.AnimatorListener() {
@@ -262,6 +274,7 @@ public class YSlideMenu extends Dialog {
     }
 
 
+
     /*****************************
      *
      * 사용자 설정 가능한 메소드
@@ -287,5 +300,18 @@ public class YSlideMenu extends Dialog {
     }
     public void setTransformDuration(int duration){
         data.circleDuration = duration;
+    }
+    public void setScrollBar(boolean scrollBar){
+        data.scrollBar = scrollBar;
+    }
+    public void setLayoutPoint(int gravity){
+        data.point = gravity;
+        if(gravity == Gravity.RIGHT){
+            data.openCenterX = data.menuButtonWidth;
+            data.closeCenterX = data.menuButtonWidth;
+        }
+    }
+    public void setCenter(int gravity){
+        data.center = gravity;
     }
 }
