@@ -1,17 +1,17 @@
 package com.yjk.yslidemenulibrary;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +19,6 @@ import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -63,6 +62,7 @@ public class YSlideMenu extends Dialog {
 
         buttonList = new ArrayList<>();
     }
+
 
     public void setParentLayout(int id){
         parentLayout = id;
@@ -128,10 +128,19 @@ public class YSlideMenu extends Dialog {
 
         for(ButtonInfomation info : buttonInfoList){
             int res = info.getRes();
+            Bitmap bitmap = info.getBitmap();
             Fragment fragment = info.getFragment();
 
             // create menu button
-            button = utils.createButton(activity, res, data);
+            button = null;
+            if(res == 0){
+                // bitmap imagebutton
+                button = utils.createButton(activity, bitmap, data);
+            }else{
+                // resource imagebutton
+                button = utils.createButton(activity, res, data);
+            }
+
 
             // set click listener
             button.setOnClickListener(new MenuButtonOnClickListener(activity, fragment));
@@ -258,11 +267,11 @@ public class YSlideMenu extends Dialog {
             View myView = activity.findViewById(parentLayout);
             int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
 
-
             int[] location = new int[2];
             view.getLocationOnScreen(location);
             int x = location[0];
             int y = location[1];
+
             Animator animator = ViewAnimationUtils.createCircularReveal(myView, x, y, 0, finalRadius);
             animator.setInterpolator(new AccelerateDecelerateInterpolator());
             animator.setDuration(data.circleDuration);
@@ -278,13 +287,19 @@ public class YSlideMenu extends Dialog {
                 @Override
                 public void onAnimationRepeat(Animator animator) {}
             });
-            animator.start();
 
             // change fragment
             FragmentManager fragmentManager = activity.getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(parentLayout, fragment);
             fragmentTransaction.commit();
+
+            try {
+                animator.start();
+            }catch (Exception e){
+                Log.d("aaaaaaa","error :" +e.getMessage());
+            }
+
         }
     }
 
