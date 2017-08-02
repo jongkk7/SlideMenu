@@ -1,6 +1,8 @@
 package com.yjk.ydrawanimationmenu;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,7 +15,7 @@ import com.yjk.ydrawanimationmenu.menu.YSlideMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     public static final String TAG = "YDrawAnimationMenu_LOG";
 
 //    YDrawAnimationMenu menu;
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void naviInit(){
         buttonInfoList = new ArrayList<ButtonInfomation>();
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.write_pen);
+
+        buttonInfoList.add(new ButtonInfomation(bitmap, new Fragment01()));
         buttonInfoList.add(new ButtonInfomation(R.drawable.icn_1, new Fragment01()));
         buttonInfoList.add(new ButtonInfomation(R.drawable.icn_2, new Fragment02()));
         buttonInfoList.add(new ButtonInfomation(R.drawable.icn_3, new Fragment03()));

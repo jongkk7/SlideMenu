@@ -1,10 +1,11 @@
 package com.yjk.ydrawanimationmenu;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 
 public class Fragment05 extends Fragment {
     View view;
-    AppCompatActivity context;
+    Activity context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,10 +26,14 @@ public class Fragment05 extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        this.context = (AppCompatActivity) context;
+        this.context = (Activity) context;
         super.onAttach(context);
     }
-
+    @Nullable
+    @Override
+    public View getView() {
+        return view;
+    }
 
 
 }

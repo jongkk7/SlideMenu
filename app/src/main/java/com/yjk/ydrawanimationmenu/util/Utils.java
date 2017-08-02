@@ -60,6 +60,7 @@ public class Utils {
     /*
         이미지로 버튼 생성
      */
+    // 리소스로 버튼 생성
     public ImageButton createButton(Context context, int drawable, Data data){
         ImageButton button = new ImageButton(context);
 
@@ -72,6 +73,23 @@ public class Utils {
         int w = data.menuIconWidth;
         int h = data.menuIconHeight;
         Bitmap bitmap = resizeBitmap(getBitmap(context, drawable), w, h);
+        button.setImageBitmap(bitmap);
+
+        return button;
+    }
+    // 비트맵으로 버튼 생성
+    public ImageButton createButton(Context context, Bitmap bitmap, Data data){
+        ImageButton button = new ImageButton(context);
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuButtonWidth, data.menuButtonHeight);
+
+        button.setLayoutParams(params);
+        button.setBackgroundColor(Color.parseColor(data.menuBackground));
+
+        //이미지 크기 조절 후 삽입
+        int w = data.menuIconWidth;
+        int h = data.menuIconHeight;
+        bitmap = resizeBitmap(bitmap, w, h);
         button.setImageBitmap(bitmap);
 
         return button;
