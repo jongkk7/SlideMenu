@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.yjk.ydrawanimationmenu.data.ButtonInfomation;
+import com.yjk.ydrawanimationmenu.menu.YBasicMenu;
 import com.yjk.ydrawanimationmenu.menu.YSlideMenu;
 
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class MainActivity extends Activity {
 //    YDrawAnimationMenu menu;
 //    List<ImageButton> buttonList;
 
-    YSlideMenu menu;
+    //YSlideMenu menu;
+    YBasicMenu menu;
     List<ButtonInfomation> buttonInfoList;
 
 
@@ -49,8 +51,9 @@ public class MainActivity extends Activity {
         buttonInfoList.add(new ButtonInfomation(R.drawable.icn_4, new Fragment04()));
         buttonInfoList.add(new ButtonInfomation(R.drawable.icn_5, new Fragment05()));
 
-        menu = new YSlideMenu(MainActivity.this, buttonInfoList);
+        menu = new YBasicMenu(MainActivity.this, buttonInfoList);
         menu.setParentLayout(R.id.parentFrgment);
+        menu.setMarginTop(50);
     }
 
     public void init(){

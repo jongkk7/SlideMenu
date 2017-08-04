@@ -28,4 +28,6 @@ public class Data {
     public int openCenterX = 0;
     public int closeCenterX = 0;
 
+    public int marginTop = 0;
+
 }
