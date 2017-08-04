@@ -47,6 +47,7 @@ public class YBasicMenu extends Dialog {
     private Data data;
     private Utils utils;
 
+    private FrameLayout frameLayout;
     private LinearLayout layout; // 메뉴 버튼이 들어갈 레이아웃
 
     private List<ButtonInfomation> buttonInfoList;  // init에서 초기화 하지 말것!
@@ -95,7 +96,10 @@ public class YBasicMenu extends Dialog {
         addButton();
 
         // layout top margin
-        setMargin();
+        WindowManager.LayoutParams params = this.getWindow().getAttributes();
+        params.y = data.marginTop;
+        getWindow().setAttributes(params);
+
 
         // 클릭 초기화
         close = true;
@@ -360,7 +364,8 @@ public class YBasicMenu extends Dialog {
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) layout.getLayoutParams();
             params.topMargin = data.marginTop;
 
-            layout.setLayoutParams(params);
+            frameLayout = (FrameLayout)findViewById(R.id.ySlideFrameLayout);
+            frameLayout.setLayoutParams(params);
         }catch (Exception e){
             Log.d("aaaaa","error : "+e.getMessage());
         }

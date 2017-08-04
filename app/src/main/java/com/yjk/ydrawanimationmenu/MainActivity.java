@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 
         menu = new YBasicMenu(MainActivity.this, buttonInfoList);
         menu.setParentLayout(R.id.parentFrgment);
-        menu.setMarginTop(50);
+        menu.setMarginTop(120);
     }
 
     public void init(){
