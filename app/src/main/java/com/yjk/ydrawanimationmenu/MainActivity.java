@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.yjk.ydrawanimationmenu.data.ButtonInfomation;
 import com.yjk.ydrawanimationmenu.menu.YBasicMenu;
@@ -28,6 +29,7 @@ public class MainActivity extends Activity {
 
 
     Button menuBtn;
+    List<ImageButton> buttonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class MainActivity extends Activity {
         menu = new YBasicMenu(MainActivity.this, buttonInfoList);
         menu.setParentLayout(R.id.parentFrgment);
         menu.setMarginTop(120);
+
+        buttonList = menu.getButtonList();
     }
 
     public void init(){
@@ -62,6 +66,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 menu.show();
+                buttonList.get(0).setImageResource(R.drawable.icn_5);
             }
         });
     }

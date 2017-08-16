@@ -359,15 +359,8 @@ public class YBasicMenu extends Dialog {
     public void setMarginTop(int marginTop){
         data.marginTop = marginTop;
     }
-    public void setMargin(){
-        try {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) layout.getLayoutParams();
-            params.topMargin = data.marginTop;
 
-            frameLayout = (FrameLayout)findViewById(R.id.ySlideFrameLayout);
-            frameLayout.setLayoutParams(params);
-        }catch (Exception e){
-            Log.d("aaaaa","error : "+e.getMessage());
-        }
+    public List<ImageButton> getButtonList(){
+        return buttonList;
     }
 }
