@@ -64,7 +64,7 @@ public class Utils {
     public ImageButton createButton(Context context, int drawable, Data data){
         ImageButton button = new ImageButton(context);
 
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuButtonWidth, data.menuButtonHeight);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuIconWidth, data.menuIconHeight);
 
         button.setLayoutParams(params);
         button.setBackgroundColor(Color.parseColor(data.menuBackground));
@@ -81,7 +81,7 @@ public class Utils {
     public ImageButton createButton(Context context, Bitmap bitmap, Data data){
         ImageButton button = new ImageButton(context);
 
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuButtonWidth, data.menuButtonHeight);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuIconWidth, data.menuIconHeight);
 
         button.setLayoutParams(params);
         button.setBackgroundColor(Color.parseColor(data.menuBackground));

@@ -11,8 +11,8 @@ public class Data {
     public int menuLayoutWidth = 280;  // 메뉴 아이콘이 들어가는 레이아웃
     public int menuButtonWidth = 280;  // 메뉴 버튼 배경의 가로
     public int menuButtonHeight = 280; // 메뉴 버튼 배경의 세로
-    public int menuIconWidth = 150;    // 메뉴 아이콘의 가로
-    public int menuIconHeight = 150;   // 메뉴 아이콘의 세로
+    public int menuIconWidth = 250;    // 메뉴 아이콘의 가로
+    public int menuIconHeight = 250;   // 메뉴 아이콘의 세로
 
     public String menuBackground = "#FF424859";     // 메뉴 버튼의 배경 ( 레이아웃의 배경이 아님 )
     public String menuButtonBackground = "#0377d2"; // 클릭된 버튼 배경

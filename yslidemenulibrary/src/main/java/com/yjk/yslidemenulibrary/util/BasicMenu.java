@@ -306,6 +306,46 @@ public class BasicMenu extends Dialog {
 
     }
 
+    /*****************************
+     *
+     * 사용자 설정 가능한 메소드
+     *
+     *****************************/
+    public void setMenuButtonBackground(String color){
+        data.menuBackground = color;
+    }
+    public void setMenuButtonSize(int size){
+        data.menuLayoutWidth = size;
+        data.menuButtonWidth = size;
+        data.menuButtonHeight = size;
+    }
+    public void setMenuButtonIconSize(int size) {
+        data.menuIconWidth = size;
+        data.menuIconHeight = size;
+    }
+    public void setMenuButtonDelay(int delay){
+        data.delay = delay;
+    }
+    public void setMenuButtonDuration(int duration){
+        data.duration = duration;
+    }
+    public void setTransformDuration(int duration){
+        data.circleDuration = duration;
+    }
+    public void setScrollBar(boolean scrollBar){
+        data.scrollBar = scrollBar;
+    }
+    public void setMenuGravity(int gravity) { data.gravity = gravity; }
+    public void setCenter(int gravity){
+        data.center = gravity;
+    }
+    public void setMarginTop(int marginTop){
+        data.marginTop = marginTop;
+    }
+
+    public List<ImageButton> getButtonList(){
+        return buttonList;
+    }
     public void setParentLayout(int id){
         parentLayout = id;
     }
