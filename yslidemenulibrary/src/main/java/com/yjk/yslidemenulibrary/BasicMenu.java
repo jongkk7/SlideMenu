@@ -300,6 +300,19 @@ public class BasicMenu extends Dialog {
         // 클릭 초기화
         close = true;
 
+        // Dialog 정렬 위치 ( default : Top | Left )
+        getWindow().setGravity(data.gravity);
+
+        // layout top margin
+        WindowManager.LayoutParams params = this.getWindow().getAttributes();
+        params.y = data.marginTop;
+        getWindow().setAttributes(params);
+
+        // layout top margin
+        WindowManager.LayoutParams marginTopParams = this.getWindow().getAttributes();
+        params.y = data.marginTop;
+        getWindow().setAttributes(marginTopParams);
+
         //시작 애니매이션 실행
         int count = 0;
         for (RelativeLayout layout : buttonlayout) {
