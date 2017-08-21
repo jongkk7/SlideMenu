@@ -73,6 +73,7 @@ public class Utils {
         int h = data.menuIconHeight;
         Bitmap bitmap = resizeBitmap(getBitmap(context, drawable), w, h);
         button.setImageBitmap(bitmap);
+        button.setBackgroundColor(Color.parseColor("#00000000"));
         button.setClickable(false);
 
         return button;
@@ -90,6 +91,7 @@ public class Utils {
         int h = data.menuIconHeight;
         bitmap = resizeBitmap(bitmap, w, h);
         button.setImageBitmap(bitmap);
+        button.setBackgroundColor(Color.parseColor("#00000000"));
         button.setClickable(false);
 
         return button;
