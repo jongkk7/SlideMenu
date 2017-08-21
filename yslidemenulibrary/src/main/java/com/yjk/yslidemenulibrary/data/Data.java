@@ -22,6 +22,8 @@ public class Data {
     public int circleDuration = 1000;   // 화면 전환 시
 
     public boolean scrollBar = false;   // 스크롤바의 막대 유무
+
+    public int gravity = Gravity.TOP|Gravity.LEFT;
     public int center = Gravity.TOP;    // 레이아웃의 정렬 ( 위쪽, 중앙 )
     public int point = Gravity.LEFT;    // 레이아웃의 위치 ( 왼쪽, 오른쪽 )
 
