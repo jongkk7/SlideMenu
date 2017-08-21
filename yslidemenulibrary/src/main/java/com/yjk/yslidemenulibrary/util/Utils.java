@@ -74,6 +74,7 @@ public class Utils {
         int h = data.menuIconHeight;
         Bitmap bitmap = resizeBitmap(getBitmap(context, drawable), w, h);
         button.setImageBitmap(bitmap);
+        button.setClickable(false);
 
         return button;
     }
@@ -91,6 +92,7 @@ public class Utils {
         int h = data.menuIconHeight;
         bitmap = resizeBitmap(bitmap, w, h);
         button.setImageBitmap(bitmap);
+        button.setClickable(false);
 
         return button;
     }
