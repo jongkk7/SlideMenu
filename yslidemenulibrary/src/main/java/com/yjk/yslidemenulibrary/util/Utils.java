@@ -67,7 +67,6 @@ public class Utils {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuIconWidth, data.menuIconHeight);
 
         button.setLayoutParams(params);
-        button.setBackgroundColor(Color.parseColor(data.menuBackground));
 
         //이미지 크기 조절 후 삽입
         int w = data.menuIconWidth;
@@ -85,7 +84,6 @@ public class Utils {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(data.menuIconWidth, data.menuIconHeight);
 
         button.setLayoutParams(params);
-        button.setBackgroundColor(Color.parseColor(data.menuBackground));
 
         //이미지 크기 조절 후 삽입
         int w = data.menuIconWidth;
