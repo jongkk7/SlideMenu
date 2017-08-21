@@ -1,4 +1,4 @@
-package com.yjk.yslidemenulibrary.util;
+package com.yjk.yslidemenulibrary;
 
 import android.animation.Animator;
 import android.app.Activity;
@@ -25,9 +25,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.yjk.yslidemenulibrary.R;
 import com.yjk.yslidemenulibrary.data.ButtonInfomation;
 import com.yjk.yslidemenulibrary.data.Data;
+import com.yjk.yslidemenulibrary.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class BasicMenu extends Dialog {
 
         init();
 
-        LayoutInit();
+        layoutInit();
     }
 
     public void init(){
@@ -69,7 +69,7 @@ public class BasicMenu extends Dialog {
         utils = new Utils();
     }
 
-    public void LayoutInit(){
+    public void layoutInit(){
         // layout setting
         LinearLayout linearLayout = new LinearLayout(activity);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -284,6 +284,11 @@ public class BasicMenu extends Dialog {
         params.y = data.marginTop;
         getWindow().setAttributes(params);
 
+        // layout top margin
+        WindowManager.LayoutParams marginTopParams = this.getWindow().getAttributes();
+        params.y = data.marginTop;
+        getWindow().setAttributes(marginTopParams);
+
 
         // 클릭 초기화
         close = true;
@@ -313,34 +318,46 @@ public class BasicMenu extends Dialog {
      *****************************/
     public void setMenuButtonBackground(String color){
         data.menuBackground = color;
+        setting();
     }
     public void setMenuButtonSize(int size){
         data.menuLayoutWidth = size;
         data.menuButtonWidth = size;
         data.menuButtonHeight = size;
+        setting();
     }
     public void setMenuButtonIconSize(int size) {
         data.menuIconWidth = size;
         data.menuIconHeight = size;
+        setting();
     }
     public void setMenuButtonDelay(int delay){
         data.delay = delay;
+        setting();
     }
     public void setMenuButtonDuration(int duration){
         data.duration = duration;
+        setting();
     }
     public void setTransformDuration(int duration){
         data.circleDuration = duration;
+        setting();
     }
     public void setScrollBar(boolean scrollBar){
         data.scrollBar = scrollBar;
+        setting();
     }
-    public void setMenuGravity(int gravity) { data.gravity = gravity; }
+    public void setMenuGravity(int gravity) {
+        data.gravity = gravity;
+        setting();
+    }
     public void setCenter(int gravity){
         data.center = gravity;
+        setting();
     }
     public void setMarginTop(int marginTop){
         data.marginTop = marginTop;
+        setting();
     }
 
     public List<ImageButton> getButtonList(){
@@ -348,5 +365,10 @@ public class BasicMenu extends Dialog {
     }
     public void setParentLayout(int id){
         parentLayout = id;
+        setting();
+    }
+
+    private void setting(){
+        layoutInit();
     }
 }
