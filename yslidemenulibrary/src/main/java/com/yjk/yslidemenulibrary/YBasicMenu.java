@@ -357,4 +357,8 @@ public class YBasicMenu extends Dialog {
     public void setMarginTop(int marginTop){
         data.marginTop = marginTop;
     }
+
+    public List<ImageButton> getButtonList(){
+        return buttonList;
+    }
 }

@@ -358,4 +358,8 @@ public class YSlideMenu extends Dialog {
     public void setCenter(int gravity){
         data.center = gravity;
     }
+
+    public List<ImageButton> getButtonList(){
+        return buttonList;
+    }
 }
