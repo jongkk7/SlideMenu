@@ -24,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.yjk.yslidemenulibrary.data.ButtonInfomation;
 import com.yjk.yslidemenulibrary.data.Data;
@@ -59,7 +60,7 @@ public class BasicMenu extends Dialog {
 
         init();
 
-        layoutInit();
+        LayoutInit();
     }
 
     public void init(){
@@ -69,16 +70,24 @@ public class BasicMenu extends Dialog {
         utils = new Utils();
     }
 
-    public void layoutInit(){
+    public void LayoutInit(){
+        contentView = new LinearLayout(activity);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        contentView.setLayoutParams(params);
+
+        ScrollView scrollView = new ScrollView(activity);
+        scrollView.setLayoutParams(params);
+        scrollView.setVerticalScrollBarEnabled(false);
+
         // layout setting
         LinearLayout linearLayout = new LinearLayout(activity);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayout.setLayoutParams(params);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         addButton(linearLayout);
 
-        contentView = linearLayout;
+        scrollView.addView(linearLayout);
+        contentView.addView(scrollView);
     }
 
     public void addButton(LinearLayout layout){
@@ -277,17 +286,12 @@ public class BasicMenu extends Dialog {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         // Dialog 정렬 위치 ( default : Top | Left )
-        getWindow().setGravity(data.gravity);
+        //getWindow().setGravity(data.gravity);
 
         // layout top margin
         WindowManager.LayoutParams params = this.getWindow().getAttributes();
         params.y = data.marginTop;
         getWindow().setAttributes(params);
-
-        // layout top margin
-        WindowManager.LayoutParams marginTopParams = this.getWindow().getAttributes();
-        params.y = data.marginTop;
-        getWindow().setAttributes(marginTopParams);
 
 
         // 클릭 초기화
@@ -308,10 +312,6 @@ public class BasicMenu extends Dialog {
         params.y = data.marginTop;
         getWindow().setAttributes(params);
 
-        // layout top margin
-        WindowManager.LayoutParams marginTopParams = this.getWindow().getAttributes();
-        params.y = data.marginTop;
-        getWindow().setAttributes(marginTopParams);
 
         //시작 애니매이션 실행
         int count = 0;
@@ -331,46 +331,40 @@ public class BasicMenu extends Dialog {
      *****************************/
     public void setMenuButtonBackground(String color){
         data.menuBackground = color;
-        setting();
     }
     public void setMenuButtonSize(int size){
         data.menuLayoutWidth = size;
         data.menuButtonWidth = size;
         data.menuButtonHeight = size;
-        setting();
     }
     public void setMenuButtonIconSize(int size) {
         data.menuIconWidth = size;
         data.menuIconHeight = size;
-        setting();
     }
     public void setMenuButtonDelay(int delay){
         data.delay = delay;
-        setting();
     }
     public void setMenuButtonDuration(int duration){
         data.duration = duration;
-        setting();
     }
     public void setTransformDuration(int duration){
         data.circleDuration = duration;
-        setting();
     }
     public void setScrollBar(boolean scrollBar){
         data.scrollBar = scrollBar;
-        setting();
     }
-    public void setMenuGravity(int gravity) {
-        data.gravity = gravity;
-        setting();
+    public void setLayoutPoint(int gravity){
+        data.point = gravity;
+        if(gravity == Gravity.RIGHT){
+            data.openCenterX = data.menuButtonWidth;
+            data.closeCenterX = data.menuButtonWidth;
+        }
     }
     public void setCenter(int gravity){
         data.center = gravity;
-        setting();
     }
     public void setMarginTop(int marginTop){
         data.marginTop = marginTop;
-        setting();
     }
 
     public List<ImageButton> getButtonList(){
@@ -378,10 +372,6 @@ public class BasicMenu extends Dialog {
     }
     public void setParentLayout(int id){
         parentLayout = id;
-        setting();
     }
 
-    private void setting(){
-        layoutInit();
-    }
 }
