@@ -373,5 +373,9 @@ public class BasicMenu extends Dialog {
     public void setParentLayout(int id){
         parentLayout = id;
     }
-
+    public void setMenuColorInit(String color){
+        for(RelativeLayout layout : buttonlayout){
+            layout.setBackgroundColor(Color.parseColor(color));
+        }
+    }
 }
